@@ -9,88 +9,91 @@ package Aufgabe_3;
  */
 public class ArrayListe<T extends Comparable<T>> implements Comparable<T>{
 	
-	private int anzahlTe;
+	private int _anzahlTe;
 	
-	private T[] element;
+	private T[] _element;
 	
-	private int pointer;
+	private int _pointer;
 	
+	@SuppressWarnings("unchecked")
 	public ArrayListe() {
-		element =  (T[]) new Object[10];
-		pointer = 0;
+		_element = (T[]) new Comparable[10];
+		_pointer = 0;
 	}
 	
 	public void	hinzufügen(T ele) {
-		for (int i = 0; i < this.element.length; i++) {
-			if (this.element[i].equals(null)) {
-				this.element[i] = ele;
-				this.anzahlTe ++;
+		for (int i = 0; i < this._element.length; i++) {
+			if (this._element[i] == null) {
+				this._element[i] = ele;
+				this._anzahlTe ++;
 				break;
 			}
-			if (i == this.element.length && !this.element[i].equals(null)) {
+			if (i == this._element.length && !(this._element[i] == null)) {
 				this.vergroessereArrayList();
-				this.element[i+1] = ele;
-				this.anzahlTe ++;
+				this._element[i+1] = ele;
+				this._anzahlTe ++;
 				break;
 			}
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private <E> void vergroessereArrayList() {
-		T[] element2 = (T[]) new Object[this.anzahlTe*2];
-		element2 = element.clone();
-		element = element2;
+		T[] _element2 = (T[]) new Comparable[_anzahlTe*2];
+		_element2 = _element.clone();
+		_element = _element2;
 	}
 	
 	public T get(int number) {
-		return this.element[number];
+		return this._element[number];
 	}
 	
 	public void entferne(T ele) {
-		for (int i = 0; i < this.element.length; i++) {
-			if (this.element[i].equals(ele)) {
-				this.element[i] = null;
-				this.anzahlTe --;
+		for (int i = 0; i < this._element.length; i++) {
+			if (this._element[i] == ele) {
+				this._element[i] = null;
+				this._anzahlTe --;
 				break;
 			}
 		}
 	}
 	
 	public void entferneTAnIndex(int index) {
-		this.element[index] = null;
-		this.anzahlTe --;
+		this._element[index] = null;
+		this._anzahlTe --;
 	}
 	
 	public int getAnzahlTe() {
-		return this.anzahlTe;
+		return this._anzahlTe;
 	}
 	
 	public String toString() {
 		String outputString = "";
-		for (int i = 0; i < this.element.length; i++) {
-			if (!this.element[i].equals(null)) {
-				outputString += this.element[i].toString();
-				outputString += "/n";
+		for (int i = 0; i < this._element.length; i++) {
+			if (!(this._element[i] == null)) {
+				outputString += this._element[i].toString();
+				outputString += ", ";
 			}
 		}
 		return outputString;
 	}
 	
 	public T getKleinstesT() {
-		T ele = element[0];
-		for (int i = 0; i < element.length; i++) {
-			if (compareTo(ele) < 0) {
-				this.pointer = i;
+		T ele;
+		for (int i = 0; i < _element.length && _element[i] != null; i++) {
+			ele = _element[i];
+			if (compareTo(ele) > 0) {
+				this._pointer = i;
 			}
 		}
-		ele = element[pointer];
-		pointer = 0;
+		ele = _element[_pointer];
+		_pointer = 0;
 		return ele;
 	}
 
 
 	@Override
 	public int compareTo(T ele) {
-        return  element[pointer].compareTo(ele);
+        return  _element[_pointer].compareTo(ele);
 	}
 }

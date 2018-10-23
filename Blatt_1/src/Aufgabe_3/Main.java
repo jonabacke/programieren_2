@@ -12,11 +12,11 @@ public class Main {
 		list.hinzufügen(2);
 		list.hinzufügen(46);
 		System.out.println(list.getKleinstesT());
-		System.out.println(list.get(3));
+		System.out.println(list.get(2));
 		System.out.println(list.getAnzahlTe());
 		list.entferneTAnIndex(5);
 		list.hinzufügen(79);
-		System.out.println(5);
+		System.out.println(list.get(5));
 		System.out.println(list.toString());
 	}
 
