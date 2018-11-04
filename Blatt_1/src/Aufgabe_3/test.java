@@ -21,27 +21,27 @@ class test {
 	@Test
 	public void testeHinzufuegen() {
 		assertEquals(0, _list.getAnzahlTe());
-		_list.hinzufügen(6);
+		_list.hinzufï¿½gen(6);
 		assertEquals(1, _list.getAnzahlTe());
-		_list.hinzufügen(4);
+		_list.hinzufï¿½gen(4);
 		assertEquals(2, _list.getAnzahlTe());
-		_list.hinzufügen(8);
+		_list.hinzufï¿½gen(8);
 		assertEquals(3, _list.getAnzahlTe());
-		_list.hinzufügen(1);
+		_list.hinzufï¿½gen(1);
 		assertEquals(4, _list.getAnzahlTe());
-		_list.hinzufügen(2);
+		_list.hinzufï¿½gen(2);
 		assertEquals(5, _list.getAnzahlTe());
-		_list.hinzufügen(46);
+		_list.hinzufï¿½gen(46);
 		assertEquals(6, _list.getAnzahlTe());
 	}
 	@Test
 	public void testeEntfernen() {
-		_list.hinzufügen(6);
-		_list.hinzufügen(4);
-		_list.hinzufügen(8);
-		_list.hinzufügen(1);
-		_list.hinzufügen(2);
-		_list.hinzufügen(46);
+		_list.hinzufï¿½gen(6);
+		_list.hinzufï¿½gen(4);
+		_list.hinzufï¿½gen(8);
+		_list.hinzufï¿½gen(1);
+		_list.hinzufï¿½gen(2);
+		_list.hinzufï¿½gen(46);
 		assertEquals(6, _list.getAnzahlTe());
 		_list.entferneTAnIndex(3);
 		assertEquals(5, _list.getAnzahlTe());
@@ -51,12 +51,12 @@ class test {
 	}
 	@Test
 	public void kleinstesElement() {
-		_list.hinzufügen(6);
-		_list.hinzufügen(4);
-		_list.hinzufügen(8);
-		_list.hinzufügen(1);
-		_list.hinzufügen(2);
-		_list.hinzufügen(46);
+		_list.hinzufï¿½gen(6);
+		_list.hinzufï¿½gen(4);
+		_list.hinzufï¿½gen(8);
+		_list.hinzufï¿½gen(1);
+		_list.hinzufï¿½gen(2);
+		_list.hinzufï¿½gen(46);
 		assertEquals(1, (int)_list.getKleinstesT());
 	}
 
