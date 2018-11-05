@@ -5,17 +5,17 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayListe<Integer> list = new ArrayListe<Integer>();
-		list.hinzuf�gen(6);
-		list.hinzuf�gen(4);
-		list.hinzuf�gen(8);
-		list.hinzuf�gen(1);
-		list.hinzuf�gen(2);
-		list.hinzuf�gen(46);
+		list.hinzufuegen(6);
+		list.hinzufuegen(4);
+		list.hinzufuegen(8);
+		list.hinzufuegen(1);
+		list.hinzufuegen(2);
+		list.hinzufuegen(46);
 		System.out.println(list.getKleinstesT());
 		System.out.println(list.get(2));
 		System.out.println(list.getAnzahlTe());
 		list.entferneTAnIndex(5);
-		list.hinzuf�gen(79);
+		list.hinzufuegen(79);
 		System.out.println(list.get(5));
 		System.out.println(list.toString());
 	}

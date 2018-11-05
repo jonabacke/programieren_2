@@ -21,7 +21,7 @@ public class ArrayListe<T extends Comparable<T>> implements Comparable<T>{
 		_pointer = 0;
 	}
 	
-	public void	hinzuf�gen(T ele) {
+	public void	hinzufuegen(T ele) {
 		for (int i = 0; i < this._element.length; i++) {
 			if (this._element[i] == null) {
 				this._element[i] = ele;
