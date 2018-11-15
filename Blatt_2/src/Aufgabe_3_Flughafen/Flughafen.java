@@ -1,36 +1,116 @@
 package Aufgabe_3_Flughafen;
 
-import java.awt.List;
-import java.util.ArrayList;
 
-public class Flughafen implements Runnable{
+
+
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+
+
+
+
+public class Flughafen extends Thread
+{
+
+	private List<Flugzeug> flugzeuge;
+	private int flugZeit;
+	private int anfangsZeit;
 	
-	private int _anzahlFlugzeuge;
-	private ArrayList<Flugzeug> _flugzeuge;
+	private boolean landebahnReserviert;
 	
-	public Flughafen() {
-		// TODO Auto-generated constructor stub
-		_flugzeuge = new ArrayList<Flugzeug>();
-	}
-	
-	public void landen(Flugzeug flugzeug) {
 		
+	/**
+	 * Ein Flughafen, der Starts und Landungen koordiniert.
+	 * @param flugzeugZahl  Die startenden und landenden Flüge.
+	 */
+	public Flughafen(int flugzeugZahl) 
+	{
+		getAnfangsZeit();
+		flugzeuge = new ArrayList<Flugzeug>();	
+		for(int i = 0; i<flugzeugZahl; i++) 
+		{
+			flugzeuge.add(new Flugzeug(this, anfangsZeit));			
+		}
+		landebahnReserviert = false;
+		flugZeit = 0;
 	}
+	
+	
+	public static void main(String[] args) 
+	{
+		Flughafen flughafen = new Flughafen(4);
+		flughafen.start();
+	}
+
+	
 	
 	@Override
-	public void run() {
-		// TODO Auto-generated method stub
+	public void run() 
+	{
+		
+		Iterator<Flugzeug> it = flugzeuge.iterator();
+		while(it.hasNext()) 
+		{
+			it.next().start();
+		}
+		
+		while(!Thread.interrupted() && !flugzeuge.isEmpty()) 
+		{
+			
+			try 
+			{
+				Thread.sleep(500);
+				flugZeit = flugZeit + 500;
+			} 
+			catch (InterruptedException e) 
+			{			
+				this.interrupt();
+				return;
+			}
+		}
+		
+		System.err.println("Alle Flugzeuge sind wieder gelandet." );
 		
 	}
 
-	private Flugzeug erzeugeFlugzeug(Flughafen hafen, int number) {
-		return null;
+	/**
+	 * Ein Flugzeug möchte landen.
+	 * @param Flugzeug, das landen möchte.
+	 * @return true, wenn Landebahn reserviert ist.
+	 */
+	public synchronized boolean landebahnFrei(Flugzeug flugzeug) 
+	{	
+		System.err.println(flugzeug.getFlugnummer() + " reserviert Landebahn");
+		landebahnReserviert = true;
+		return true;
+	}		
+
+
+	/**
+	 * Das Flugzeug ist gelandet und kann entfernt werden.
+	 * @param flugzeug , das gelandet ist.
+	 */
+	public synchronized void gelandet(Flugzeug flugzeug) 
+	{
+		landebahnReserviert = false;
+		flugzeug.interrupt();
+		flugzeuge.remove(flugzeug);		
+		getAnfangsZeit();
+		Flugzeug neuesFlugzeug = new Flugzeug(this, anfangsZeit);
+		neuesFlugzeug.start();
+		flugzeuge.add(neuesFlugzeug);
+		
+		
+	}
+
+	
+	public void getAnfangsZeit()
+	{
+		anfangsZeit = (int)System.currentTimeMillis();
 	}
 	
-	public static void main(String[] args) {
-		
-	}
-
 }
-
-	
