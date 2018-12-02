@@ -17,13 +17,7 @@ public class Lockführer implements Runnable{
 		}
 		else {
 			Zug zug = new Zug();
-			while (!zugEinfahren(zug, gleis)) {
-				 try {
-					wait(200);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
+			zugEinfahren(zug, gleis);
 		}
 	}
 	

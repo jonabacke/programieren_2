@@ -11,10 +11,22 @@ public class Rangierbahnhof {
 	
 	public synchronized boolean zugEinfahren(Zug zug, int gleisnummer) 
 	{
-		if (gleisnummer < 0 || gleisnummer > _gleis.length || _gleis[gleisnummer] != null) 
+		if (gleisnummer < 0 || gleisnummer > _gleis.length) 
 		{
-			System.err.println("Gleis " + gleisnummer + " nicht vorhanden oder besetzt");
+			System.err.println("Gleis " + gleisnummer + " nicht vorhanden");
 			return false;
+		}
+		else if (_gleis[gleisnummer] != null) {
+			while (_gleis[gleisnummer] != null) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+					return false;
+				}
+			}
+			_gleis[gleisnummer] = zug;
+			return true;
 		}
 		else
 		{
